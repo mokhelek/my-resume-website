@@ -3,6 +3,16 @@
 {% block content %}
 
 <style type="text/css">
+	
+	:root{
+		--secondaryText:#222222;
+	}
+
+	.entry{
+	color: var(--secondaryText);
+	font-family: 'Roboto Mono', monospace;
+	}
+
 	img{
 		max-width: 100%;
 		object-fit: cover;
@@ -76,11 +86,11 @@
 	{% endfor %}
 	<hr>
 
-	<h1>{{post.headline}}</h1>
-	<h4>{{post.sub_headline}}</h4>
+	<h1 style="color: black;">{{post.headline}}</h1>
+	<h4 style="color: rgb(0, 0, 0);">{{post.sub_headline}}</h4>
 	<br>
 
-	<p>{{post.body|safe}}</p>
+	<div class="entry">{{post.body|safe}}</div>
 
 </div>
 

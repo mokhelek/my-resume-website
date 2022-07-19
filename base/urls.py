@@ -14,7 +14,7 @@ urlpatterns = [
 	path('delete_post/<slug:slug>/', views.deletePost, name="delete_post"),
 
 
-	path('send_email/', views.sendEmail, name="send_email"),
+	path('send_email/', views.contacts, name="contacts"),
 
 	#path('login/', views.loginPage, name="login"),
 	#path('register/', views.registerPage, name="register"),

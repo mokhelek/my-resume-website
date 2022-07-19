@@ -1,3 +1,4 @@
+from email import message
 from django.db import models
 from django.contrib.auth.models import User
 from time import timezone
@@ -61,6 +62,19 @@ class Post(models.Model):
 			self.slug = slug
 
 		super().save(*args, **kwargs)
+  
+  
+class Contacts(models.Model):
+    name = models.CharField(max_length=200)
+    subject = models.CharField(max_length=300)
+    email = models.EmailField()
+    message = models.TextField() 
+    
+    def __str__(self):
+        return f'{self.name}: {self.subject}'
+
+
+
 
 """ 
 class PostComment(models.Model):

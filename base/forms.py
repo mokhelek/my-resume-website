@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from .models import Post, Profile
+from .models import Post, Profile , Contacts
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -33,3 +33,9 @@ class ProfileForm(ModelForm):
 		model = Profile
 		fields = '__all__'
 		exclude = ['user']
+  
+class ContactsForm(ModelForm):
+    
+    class Meta:
+        model = Contacts
+        fields = ['name','subject','email','message']

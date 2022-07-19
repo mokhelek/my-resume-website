@@ -11,20 +11,36 @@ from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from .decorators import *
 
-from .forms import PostForm, CustomUserCreationForm, ProfileForm, UserForm
+from .forms import PostForm, CustomUserCreationForm, ProfileForm, UserForm , ContactsForm
 from .filters import PostFilter
 
 from .models import *
 
 # Create your views here.
-
+"""   
 def home(request):
 	posts = Post.objects.filter(active=True, featured=True)[0:3]
 
-	context = {'posts':posts}
-	return render(request, 'base/index.html', context)
+    context = {'posts':posts}
 
+	return render(request,'base/index.html',context)
+
+ """
+
+def home(request):
+    posts = Post.objects.filter(active=True,featured=True)[0:3]
+    form = ContactsForm()
+    if request.method == 'POST':
+        form =  ContactsForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect("home")
+    
+    context = {'posts':posts,"form":form}
+    return render(request , "base/index.html",context)
+     
 def posts(request):
+    
 	posts = Post.objects.filter(active=True)
 	myFilter = PostFilter(request.GET, queryset=posts)
 	posts = myFilter.qs
@@ -105,7 +121,7 @@ def deletePost(request, slug):
 	context = {'item':post}
 	return render(request, 'base/delete.html', context)
 
-
+"""  
 
 def sendEmail(request):
 
@@ -128,7 +144,7 @@ def sendEmail(request):
 		email.send()
 
 	return render(request, 'base/email_sent.html')
-
+ """
 def loginPage(request):
 	if request.user.is_authenticated:
 		return redirect('home')
@@ -153,6 +169,24 @@ def loginPage(request):
 
 	context = {}
 	return render(request, 'base/login.html', context)
+
+def contacts(request):
+    form = ContactsForm()
+    
+    if request.method == 'POST':
+        form =  ContactsForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect("home")
+			
+        
+    return render(request, "base/index.html", {"form":form})
+
+
+
+
+
+
 """
 def registerPage(request):
 	form = CustomUserCreationForm()

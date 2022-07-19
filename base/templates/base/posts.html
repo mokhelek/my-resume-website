@@ -5,7 +5,16 @@
 
 
 <style type="text/css">
+	:root{
+		--secondaryText:#222222;
+	};
+	.postst{
+	color: var(--secondaryText);
+	font-family: 'Roboto Mono', monospace;
+	}
+
 	#div_id_tags, #id_tags{
+		color: var(--secondaryText);
 		overflow-y: scroll;
 		max-height: 100px;
 		border-radius: 5px;
@@ -15,7 +24,7 @@
 </style>
 
 <div class="main-container">
-	<h1>Posts</h1>
+	<h2 class="postst" style="color: rgb(32, 32, 32);font-weight: 600;">Posts</h2>
 	{% if request.user.is_staff %}
 		<a class="btn btn-warning" href="{% url 'create_post' %}">Create Post</a>
 	{% endif %}
@@ -32,7 +41,7 @@
 			<div class="post">
 				<img class="thumbnail" src="{{post.thumbnail.url}}">
 				<div class="post-preview">
-					<h6 class="post-title">{{post.headline}}</h6>
+				<strong  class="post-title"> {{post.headline}}</strong>
 					<p class="post-intro">{{post.sub_headline}}</p>
 					<a href="{% url 'post' post.slug %}">Read More</a>
 
